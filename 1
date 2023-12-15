@@ -1,0 +1,32 @@
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the no of elements in array :");
+        int n=sc.nextInt();
+        System.out.println("Enter the elements of array : ");
+        int[] a=new int[n];
+        int count=0,sum=0,max=0;
+        List<Integer> subset=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            a[i]=sc.nextInt();
+            if(a[i]>max){
+                max=a[i];
+            }
+            if(a[i]>=0){
+                sum+=a[i];
+                count++;
+                subset.add(a[i]);
+            }
+        }
+        if(sum==0&& length==0){
+            System.out.println("Maximum sum is : "+max);
+System.out.println("No of elements:"+count);
+        }
+        else{
+              System.out.println("Maximum sum is : "+max);
+System.out.println("No of elements:"+count);
+System.out.println("The subset is:"+subset);            
+        }
+    }
+}
