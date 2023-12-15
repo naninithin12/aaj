@@ -1,0 +1,46 @@
+import java.util.*;
+class Student {
+    int marks;
+    int bound;
+
+    public Student(int marks, int bound) {
+        this.marks = marks;
+        this.bound = bound;
+    }
+}
+
+public class Main {
+    public static int maxStudentsPass(Student[] students) {
+        int N = students.length;
+        int[] dp = new int[N];
+        Arrays.fill(dp, 1);  // Initialize DP array with 1 for each student
+
+        for (int i = 1; i < N; i++) {
+            for (int j = 0; j < i; j++) {
+                if (students[i].marks > students[j].marks) {
+                  if (dp[j] + 1 > dp[i]) {
+                        dp[i] = dp[j] + 1;
+                    }
+                }
+            }
+        }
+        int maxPassingStudents = Arrays.stream(dp).max().orElse(0);
+        return maxPassingStudents;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter no of students: ");
+        int N = scanner.nextInt();
+        Student[] students = new Student[N];
+        System.out.println("Enter the marks and bounds of the Students");
+        for (int i = 0; i < N; i++) {
+            int marks = scanner.nextInt();
+            int bound = scanner.nextInt();
+            students[i] = new Student(marks, bound);
+        }
+       Arrays.sort(students, Comparator.comparingInt(student -> student.marks));
+        int result = maxStudentsPass(students);
+        System.out.println("Maximum number of students that can pass: " + result);
+    }
+}

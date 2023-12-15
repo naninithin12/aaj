@@ -1,0 +1,32 @@
+import java.util.*;
+class GoodPairs{
+public static boolean check(String a, String b){
+for(int i=0;i<a.length();i++)
+for(int j=0;j<b.length();j++)
+if(a.charAt(i)==b.charAt(j)){
+System.out.println("("+a+","+b+")");
+return true;
+}
+return false;
+}
+public static void main(String args[]){
+Scanner sc=new Scanner(System.in);
+System.out.print("Enter number of strings:");
+int n=sc.nextInt();
+String[] str=new String[n];
+System.out.print("enter strings:");
+for(int i=0;i<n;i++)
+str[i]=sc.next();
+int count=0;
+for(int i=0;i<n;i++)
+for(int j=i+1;j<n;j++)
+if(check(str[i],str[j]))
+count++;
+if(count==0)
+System.out.print("no good pair strings available in 
+given strings");
+else
+System.out.print("number of good pairs of 
+strings:"+count);
+}
+}

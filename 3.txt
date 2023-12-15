@@ -1,0 +1,74 @@
+import java.util.*;
+class Main
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.print("enter n value:");
+        int n=sc.nextInt();
+        int a[]=new int[n];
+        System.out.print("enter array values:");
+        for(int i=0;i<n;i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        int l=0,h=n-1;
+        quicksort(a,l,h);
+        System.out.println("sorted order:");
+        for(int i=0;i<n;i++)
+            System.out.println(a[i]+" ");
+        System.out.println("enter x value:");
+        int x=sc.nextInt();
+        int z=x+1;
+        while(true)
+        {
+            if(!found(a,n,z))
+            {
+                System.out.println("strictly greater value of "+x+" is "+z);
+                break;
+            }
+            z++;
+        }
+    }
+    public static boolean found(int a[],int n,int z)
+    {
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]==z)
+             	    return true;
+        }
+         return false;
+    }
+    public static void quicksort(int a[],int l,int h)
+    {
+        if(l<h)
+        {
+            int pi=partition(a,l,h);
+            quicksort(a,l,pi-1);
+            quicksort(a,pi+1,h);
+        }
+    
+    }
+    public static int partition(int a[],int l,int h)
+    {
+        int pivot=a[h];
+        int i=l-1;
+        for(int j=l;j<h;j++)
+        {
+            if(a[j]<pivot)
+            {
+                i++;
+                swap(a,i,j);
+            }
+        }
+        i++;
+        swap(a,i,h);
+        return i;
+    }
+    public static void swap(int a[],int x,int y)
+    {
+        int temp=a[x];
+        a[x]=a[y];
+        a[y]=temp;
+    }
+}

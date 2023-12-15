@@ -1,0 +1,71 @@
+import java.util.Arrays;
+import java.util.Scanner;
+public class TravelTime {
+    public static int totMinTime(int[] groups, int[] planes) 
+    {
+        Arrays.sort(groups);
+        Arrays.sort(planes);    
+        int left = 0;
+        int right = groups.length;
+        int res = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;	
+            if (binarySearch(groups, planes, mid)) 
+            {
+                res = mid;
+                right = mid - 1;
+            } 
+            else 
+            {
+                left = mid + 1;
+            }
+        }
+        return res * 2 - 1;
+    }
+    private static boolean binarySearch(int[] groups, int[] planes, int numPlanes) 
+    {
+        int totalGroups = groups.length;
+        int groupIndex = 0;
+        for (int i = 0; i < planes.length && groupIndex < totalGroups; i++) 
+        {
+            int planeCapacity = planes[i];
+            int groupCount = 0;
+            while (groupIndex < totalGroups && groupCount < numPlanes) 
+            {
+                if (groups[groupIndex] <= planeCapacity) 
+                {
+                    groupCount++;
+                    groupIndex++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        return groupIndex == totalGroups;
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of groups: ");
+        int N = sc.nextInt();
+        System.out.print("Enter number of planes: ");
+        int M = sc.nextInt();
+        int[] groups = new int[N];
+        for (int i = 0; i < N; i++) 
+        {
+            System.out.print("Enter size of group G" + (i + 1) + ": ");
+            groups[i] = sc.nextInt();
+        }
+        int[] planes = new int[M];
+        for (int i = 0; i < M; i++)
+        {
+            System.out.print("Enter size of plane P" + (i + 1) + ": ");
+            planes[i] = sc.nextInt();
+        }
+        int res = totMinTime(groups, planes);
+        System.out.println("Total minimum time is : " + res);
+        sc.close();
+    }
+}

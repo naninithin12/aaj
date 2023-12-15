@@ -1,0 +1,49 @@
+import java.util.*;
+class greedyKnapsack{
+public static void main(String args[]){
+Scanner sc=new Scanner(System.in);
+System.out.print("Enter capacity of knapsack:");
+int capacity=sc.nextInt();
+System.out.print("Enter number of items:");
+int n=sc.nextInt();
+int wt[]=new int[n];
+int profit[]=new int[n];
+float unitval[]=new float[n];
+System.out.println("Enter weight and its profit of each item 
+respectively:");
+for(int i=0;i<n;i++){
+wt[i]=sc.nextInt();
+profit[i]=sc.nextInt();
+unitval[i]=(float)profit[i]/(float)wt[i];
+}
+for(int i=0;i<n;i++){
+int idx=i;
+for(int j=i;j<n;j++)
+if(unitval[j]>unitval[idx])
+idx=j;
+float t1=unitval[i];
+unitval[i]=unitval[idx];
+unitval[idx]=t1;
+int t2=wt[i];
+wt[i]=wt[idx];
+wt[idx]=t2;
+t2=profit[i];
+profit[i]=profit[idx];
+profit[idx]=t2;
+}
+int i=0;
+float totalprofit=0;
+while(capacity!=0&&i<n){
+if(capacity>=wt[i]){
+capacity-=wt[i];
+totalprofit+=(float)profit[i];
+i++;
+}
+else{
+totalprofit+=(float)capacity*unitval[i];
+capacity=0;
+}
+}
+System.out.print("Total profit:"+totalprofit);
+}
+}

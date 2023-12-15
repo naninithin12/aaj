@@ -1,0 +1,33 @@
+import java.util.*;
+class equalSum{
+public static boolean sum(int num, int length){
+int sum1=0,sum2=0,l=length;
+while(num>0){
+if(l>length/2)
+sum1+=num%10;
+else
+sum2+=num%10;
+l--;
+num/=10;
+}
+return sum1==sum2;
+}
+public static void main(String args[]){
+Scanner sc=new Scanner(System.in);
+System.out.print("Enter range of numbers:");
+int m=sc.nextInt();
+int n=sc.nextInt();
+System.out.print("Beautiful numbers:{ ");
+for(int i=m;i<n+1;i++){
+int t1=i,tc=0;
+while(t1>0){
+tc++;
+t1/=10;
+}
+if(tc%2==0)
+if(sum(i,tc))
+System.out.print("("+i+") ");
+}
+System.out.print("}");
+}
+}
